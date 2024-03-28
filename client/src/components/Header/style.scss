@@ -1,0 +1,27 @@
+// Style pour le header
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    &_logo {
+        width: 30%;
+        max-width: 250px;
+
+        img {
+            width: 100%;
+        }
+    }
+
+    &_nav {
+        width: 40%;
+        max-width: 350px;
+        display: flex;
+        justify-content: flex-end;
+
+        a {
+            width: 30%;
+            max-width: 100px;
+        }
+    }
+}
