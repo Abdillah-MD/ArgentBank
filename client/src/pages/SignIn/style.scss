@@ -1,0 +1,37 @@
+// Pour la page Sign in
+
+.main_signIn {
+    background-color: #12002b;
+    height: 80vh;
+    position: relative;
+
+    .sign-in {
+        position: absolute;
+        top: 18rem;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        box-sizing: border-box;
+        background-color: white;
+        width: 300px;
+        margin: 0 auto;
+        padding: 2rem;
+
+        // text-align: center;
+        &-icon {
+            font-size: 1.4rem;
+            display: block;
+            text-align: center;
+        }
+
+        &-title {
+            font-size: 1.5rem;
+            text-align: center;
+        }
+    }
+
+    .sign-up {
+        padding: 1rem 0 0 0;
+        display: block;
+        text-align: center;
+    }
+}

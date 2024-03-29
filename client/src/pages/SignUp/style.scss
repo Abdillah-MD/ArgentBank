@@ -1,0 +1,42 @@
+// Pour la page Sign up
+
+.main_signUp {
+    background-color: #12002b;
+    height: 120vh;
+    position: relative;
+    overflow: scroll;
+
+    @media (max-width: 768px) {
+        height: 100vh;
+    }
+
+    .sign-in {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        box-sizing: border-box;
+        background-color: white;
+        width: 300px;
+        margin: 0 auto;
+        padding: 2rem;
+
+        // text-align: center;
+        &-icon {
+            font-size: 1.4rem;
+            display: block;
+            text-align: center;
+        }
+
+        &-title {
+            font-size: 1.5rem;
+            text-align: center;
+        }
+    }
+
+    .sign-up {
+        padding: 1rem 0 0 0;
+        display: block;
+        text-align: center;
+    }
+}
