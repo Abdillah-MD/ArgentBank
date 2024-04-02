@@ -3,15 +3,16 @@ import { useLocation } from "react-router-dom"
 import "./style.scss"
 import PropTypes from "prop-types"
 
-const Form = ({formData}) => {
+const Form = ({arrayGenerateInputForm, handleInputChange, handleSubmit}) => {
     const location = useLocation()
+
     return (
-        <form action="/admin">
+        <form action="/admin" onSubmit={handleSubmit}>
             {/* Parcours tout le tableau pour afficher les input du formulaire */}
-            {formData.map((data, index) => (
+            {arrayGenerateInputForm.map((data, index) => (
                 <div className="input-wrapper" key={index}>
                     <label htmlFor={data.id}>{data.label}</label>
-                    <input type={data.type} id={data.id} required/>
+                    <input type={data.type} name={data.name} id={data.id} onChange={handleInputChange} required/>
                 </div>
             ))}
             {/* Permet d'afficher l'input checkbox en fonction de l'url de la page */}
@@ -31,7 +32,9 @@ const Form = ({formData}) => {
 }
 
 Form.propTypes = {
-    formData: PropTypes.array.isRequired,
+    arrayGenerateInputForm: PropTypes.array.isRequired,
+    handleInputChange: PropTypes.func.isRequired,
+    handleSubmit: PropTypes.func,
 }
 
 export default Form
