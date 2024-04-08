@@ -1,0 +1,65 @@
+// Pour le composant qui contient les transactions 
+
+.transaction {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid black;
+    background-color: #fff;
+    width: 80%;
+    margin: 0 auto;
+    flex-direction: column;
+    padding: 1.5rem;
+    box-sizing: border-box;
+    text-align: left;
+    margin-bottom: 2rem;
+
+    @media (min-width: 720px) {
+        flex-direction: row;
+    }
+
+    &_info {
+        width: 100%;
+        flex: 1;
+
+        &-title {
+            margin: 0;
+            padding: 0;
+            font-size: 1rem;
+            font-weight: normal;
+        }
+
+        &-amount {
+            margin: 0;
+            font-size: 2.5rem;
+            font-weight: bold;
+        }
+
+        &-balance {
+            margin: 0;
+        }
+    }
+
+    &_link {
+        @media (max-width: 720px) {
+            margin-top: 30px;
+        }
+
+        &-toDetails {
+            border-color: #00bc77;
+            background-color: #00bc77;
+            color: #fff;
+            font-weight: bold;
+            padding: 10px;
+            border-bottom: 2px solid #00945c;
+            border-right: 2px solid #00945c;
+            transition: all 300ms ease-out;
+        }
+
+        &-toDetails:hover {
+            color: white;
+            filter: brightness(1.1);
+            transition: all 300ms ease-out;
+        }
+    }
+}

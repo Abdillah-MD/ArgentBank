@@ -37,9 +37,7 @@ const Header = () => {
 
     // Utilisation du kook useEffect pour appeler la F° getUserName au 1er render de la page
     useEffect(() => {
-        if (isAuthenticated === "true") {
-            getUserName()
-        }
+        getUserName()
     }, [token, isAuthenticated])
 
     return (
