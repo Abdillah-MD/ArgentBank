@@ -30,7 +30,6 @@ const SignIn = () => {
     const dispatch = useDispatch()
 
     // Au submit du formulaire
-    // const history = useHistory()
     const handleSubmit = async (e) => {
         e.preventDefault()
         console.log(formData)
@@ -47,7 +46,7 @@ const SignIn = () => {
             if (response.status === 200) {
                 const token = response.data.body.token
                 dispatch(login(token))
-                // window.location.href = "/admin"
+                window.location.href = "/admin"
             }
         } catch (err) {
             console.error("Login error:", err)
