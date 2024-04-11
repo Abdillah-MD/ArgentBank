@@ -1,44 +1,30 @@
-import { useSelector } from "react-redux"
-import { selectIsAuthenticated, selectToken } from "../../redux/selectors/authSelectors"
+import { useDispatch, useSelector } from "react-redux"
+import { selectIsAuthenticated, selectToken, selectUser } from "../../redux/selectors/authSelectors"
 import "./style.scss"
 import { Link } from "react-router-dom"
 import UserName from "../../components/UserName/main"
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
 import TransactionCard from "../../components/TransactionCard/main"
+import { getUser } from "../../redux/slices/userSlice"
 
 const Admin = () => {
-    const [name, setName] = useState()
+    const dispatch = useDispatch()
     // Utilisation du useSelector pour accéder au token dans le store Redux
     const token = useSelector(selectToken)
     const isAuthenticated = useSelector(selectIsAuthenticated)
-    console.log(token)
+    const User = useSelector(selectUser)
 
-    // 
-    // Appelle API pour récupérer le nom de l'utilisateur
-    const getUserName = async () => {
-        try {
-            const response = await fetch ("http://localhost:3001/api/v1/user/profile", {
-                    method: "POST",
-                    headers: {"Authorization": `Bearer ${sessionStorage.getItem("Token")}`}
-            })
-
-            setName( await response.json())
-
-        } catch (err) {
-            console.log(err)
-        }
-    }
 
     // Utilisation du kook useEffect pour appeler la F° getUserName au 1er render de la page
     useEffect(() => {
-        getUserName()
-    }, [token])
+        dispatch(getUser())
+    }, [dispatch, token])
     return (
         isAuthenticated === null || isAuthenticated === false ? window.location.href = "/sign-in"
         : (
             <main className="adminPage">
                 <div className="adminPage_title">
-                    <h1>Welcome back<br/> {name && <UserName name={`${name.body.firstName} ${name.body.lastName}`} />} </h1>
+                    <h1>Welcome back<br/> {User && <UserName name={`${User?.firstName} ${User?.lastName}`} />} </h1>
                     <Link className="edit_button">Edit Name</Link>
                 </div>
                 <TransactionCard 

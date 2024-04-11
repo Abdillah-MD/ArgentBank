@@ -10,12 +10,15 @@ import Footer from './components/Footer/main'
 import SignIn from './pages/SignIn/main'
 import Admin from './pages/Admin/main'
 import SignUp from './pages/SignUp/main'
+import ErrorBoundary from './components/ErrorBoundary/ErrorBoundary'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <Provider store={store}>
     <React.StrictMode>
     <Router>
-      <Header />
+      <ErrorBoundary>
+        <Header />
+      </ErrorBoundary>
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/accueil' element={<Home />} />

@@ -1,12 +1,14 @@
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import Form from "../../components/Form/main"
 import "./style.scss"
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { useState } from "react";
-import { login } from "../../redux/slices/authSlice";
+import { login } from "../../redux/slices/userSlice";
 
 const SignUp = () => {
+    const navigate = useNavigate()
+
     const arrayGenerateInputForm = [
         { label: "First Name", type: "text", name: "firstName", id: "firstName" },
         { label: "Last Name", type: "text", name: "lastName", id: "lastName" },
@@ -51,7 +53,7 @@ const SignUp = () => {
             if (response.status === 200) {
                 const token = response.data.body.token
                 dispatch(login(token))
-                // window.location.href = "/admin"
+                navigate(`/sign-in`)
             }
         } catch (err) {
             console.error("Login error:", err)

@@ -1,12 +1,14 @@
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import Form from "../../components/Form/main"
 import "./style.scss"
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { login } from "../../redux/slices/authSlice"
-import axios from "axios";
+import { login } from "../../redux/slices/userSlice"
 
 const SignIn = () => {
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
+
     // Input à injecter dans la page
     const arrayGenerateInputForm = [
         { label: "Username", type: "email", name: "email", id: "email" },
@@ -25,32 +27,18 @@ const SignIn = () => {
         setFormData({ ...formData, [name]: value });
     }
 
-
-    //////////////// Utiliser REDUX avec le store /////////////
-    const dispatch = useDispatch()
-
+    
     // Au submit du formulaire
     const handleSubmit = async (e) => {
         e.preventDefault()
+
+        const resultAction = await dispatch(login(formData)) // Utilisation de l'action createAsyncThunk
+        if (login.fulfilled.match(resultAction)) {
+            navigate('/admin') // Redirection vers la page admin si la connexion réussit
+        }
+
         console.log(formData)
 
-        // Requête HTTP avec axios pour récupérer le token 
-        try {
-            const response = await axios.post("http://localhost:3001/api/v1/user/login", formData)
-             
-            console.log(response)
-            console.log("=========")
-            console.log(response.data.body.token)
-
-            // Si la réponse serveur est 200 
-            if (response.status === 200) {
-                const token = response.data.body.token
-                dispatch(login(token))
-                window.location.href = "/admin"
-            }
-        } catch (err) {
-            console.error("Login error:", err)
-        }
     }
 
 
