@@ -42,7 +42,7 @@ const Header = () => {
                     ? <>
                     {isAuthenticated && (
                         <>
-                            <Link className="header_nav-link" to="/admin/user"><i className="fa-solid fa-circle-user"></i> <UserName name={`${User?.userName}`} /></Link>
+                            <p className="header_nav-link" to="/admin/"><i className="fa-solid fa-circle-user"></i> <UserName name={`${User?.userName}`} /></p>
                             <Link className="header_nav-link" to="/accueil" onClick={removeToken}><i className="fa-solid fa-right-from-bracket"></i> Sign out</Link>
                         </>
                     )}
