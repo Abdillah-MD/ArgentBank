@@ -2,12 +2,15 @@ import { Link, useNavigate } from "react-router-dom"
 import Form from "../../components/Form/main"
 import "./style.scss"
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { login } from "../../redux/slices/userSlice"
+import { selectCreateAcountSuccess, selectError } from "../../redux/selectors/authSelectors";
 
 const SignIn = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
+    const error = useSelector(selectError)
+    const acountCreateSuccessfully = useSelector(selectCreateAcountSuccess)
 
     // Input à injecter dans la page
     const arrayGenerateInputForm = [
@@ -46,6 +49,8 @@ const SignIn = () => {
         <section className="sign-in">
             <i className="fa-solid fa-circle-user sign-in-icon"></i>
             <h1 className="sign-in-title">Sign in</h1>
+            {login.rejected ? <p style={{textAlign: "center", color: "red", fontWeight: "bold"}}> {error} </p> : null}
+            {acountCreateSuccessfully === true ? <p style={{textAlign: "center", color: "green", fontWeight: "bold"}}> Account created successfully </p> : null}
             <Form arrayGenerateInputForm={arrayGenerateInputForm} handleInputChange={handleInputChange} handleSubmit={handleSubmit}/>
             <p className="sign-up">No account? <Link to="/sign-up">Sign up</Link></p>
         </section>
