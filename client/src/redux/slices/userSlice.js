@@ -6,6 +6,7 @@ import axios from "axios"
 const initialState = {
   isAuthenticated: sessionStorage.getItem("isAuthenticated") ? true : false,
   token: sessionStorage.getItem("Token") || null,
+  createAcountSuccess: null,
   user: {},
   error: null,
 }
@@ -17,6 +18,15 @@ export const login = createAsyncThunk(
   "userSlice/login",
   async (userData) => {
     const {data} = await axios.post("http://localhost:3001/api/v1/user/login", userData)
+    return data.body
+  }
+)
+
+// Pour créer un compte 
+export const createAcount = createAsyncThunk(
+  "userSlice/createAcount",
+  async (userData) => {
+    const {data} = await axios.post("http://localhost:3001/api/v1/user/signup", userData)
     return data.body
   }
 )
@@ -37,6 +47,21 @@ export const getUser = createAsyncThunk(
   }
 )
 
+// Pour changer le userName 
+export const updateUserName = createAsyncThunk(
+  "userSlice/updateUserName",
+  async (userName) => {
+    const token = sessionStorage.getItem("Token")
+    const {data} = await axios.put("http://localhost:3001/api/v1/user/profile", {"userName": `${userName}`}, {
+      headers: {
+        "Content-Types": "application/json",
+        "Authorization": `Bearer ${token}`,
+      }
+    })
+    return data.body
+  }
+)
+
 const userSlice = createSlice({
   name: "user",
   initialState,
@@ -52,6 +77,18 @@ const userSlice = createSlice({
 
   extraReducers: (builder) => {
 
+    ////////// Gérer la création d'un compte ///////////
+    builder.addCase(createAcount.fulfilled, (state, action) => {
+      state.user = action.payload
+      state.createAcountSuccess = true
+      
+    })
+
+    builder.addCase(createAcount.rejected, (state, action) => {
+      state.user = action.error
+      state.createAcountSuccess = false
+    })
+
     ////////// Gérer le cas où login success ///////////
     builder.addCase(login.fulfilled, (state, action) => {
       state.isAuthenticated = true
@@ -60,14 +97,16 @@ const userSlice = createSlice({
       sessionStorage.setItem("Token", action.payload.token)
       sessionStorage.setItem("isAuthenticated", true)
     })
-    ///////////////////////////////////////////////////////
 
     /////////// Gérer le cas où login echec ////////////
     builder.addCase(login.rejected, (state, action) => {
       sessionStorage.clear()
       state.isAuthenticated = false
       state.token = null
-      state.error = action.payload ? action.payload.message : "Unknown error occurred";
+      // state.error = action.error ? action.error.message : "Unknown error occurred";
+      action.error.message.includes("400") ? state.error = "invalid login" : "Unknown error occurred"
+      action.error.message.includes("500") ? state.error = "Server error, try again later" : "Unknown error occurred"
+      action.error.message.includes("Network Error") ? state.error = "Server error, try again later" : "Unknown error occurred"
       console.log(state.error)
     })
     ///////////////////////////////////////////////////////
@@ -75,6 +114,13 @@ const userSlice = createSlice({
     // Obtenir les informations utilisateur ///
     builder.addCase(getUser.fulfilled, (state, action) => {
       state.user = action.payload
+    })
+    ////////////////////////////////////////////////////////
+
+    // Pour changer le userName ///////
+    builder.addCase(updateUserName.fulfilled, (state, action) => {
+      state.user.userName = action.payload.userName
+      // console.log(action.payload.userName)
     })
   }
 })

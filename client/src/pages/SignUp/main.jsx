@@ -1,13 +1,16 @@
 import { Link, useNavigate } from "react-router-dom"
 import Form from "../../components/Form/main"
 import "./style.scss"
-import axios from "axios";
-import { useDispatch } from "react-redux";
+// import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
-import { login } from "../../redux/slices/userSlice";
+import { createAcount } from "../../redux/slices/userSlice";
+import { selectCreateAcountSuccess } from "../../redux/selectors/authSelectors";
 
 const SignUp = () => {
     const navigate = useNavigate()
+    const dispatch = useDispatch()
+    const acountCreateSuccessfully = useSelector(selectCreateAcountSuccess)
 
     const arrayGenerateInputForm = [
         { label: "First Name", type: "text", name: "firstName", id: "firstName" },
@@ -32,31 +35,14 @@ const SignUp = () => {
         setFormData({ ...formData, [name]: value });
     }
 
-
-    //////////////// Utiliser REDUX avec le store /////////////
-    const dispatch = useDispatch()
-
     // Au submit du formulaire
     const handleSubmit = async (e) => {
         e.preventDefault()
         console.log(formData)
 
-        // Requête HTTP avec axios pour récupérer le token 
-        try {
-            const response = await axios.post("http://localhost:3001/api/v1/user/signup", formData)
-            
-            console.log(response)
-            console.log("=========")
-            console.log(response.data.body.token)
-
-            // Si la réponse serveur est 200 
-            if (response.status === 200) {
-                const token = response.data.body.token
-                dispatch(login(token))
-                navigate(`/sign-in`)
-            }
-        } catch (err) {
-            console.error("Login error:", err)
+        const resultAction = await dispatch(createAcount(formData)) // Utilisation de l'action createAsyncThunk
+        if (createAcount.fulfilled.match(resultAction)) {
+            navigate('/sign-in') // Redirection vers la page admin si la connexion réussit
         }
     }
 
@@ -64,6 +50,7 @@ const SignUp = () => {
         <section className="sign-in">
             <i className="fa-solid fa-circle-user sign-in-icon"></i>
             <h1 className="sign-in-title">Sign up</h1>
+            {acountCreateSuccessfully === false ? <p style={{textAlign: "center", color: "red", fontWeight: "bold"}}> Please complete all fields correctly </p> : null}
             <Form arrayGenerateInputForm={arrayGenerateInputForm} handleSubmit={handleSubmit} handleInputChange={handleInputChange}/>
             <p className="sign-up">Already have an account?<br/><Link to="/sign-in">Sign in</Link></p>
         </section>

@@ -1,0 +1,50 @@
+// Pour le composant UserEdit
+
+.edit {
+    display: flex;
+    flex-direction: column;
+    color: white;
+    margin: 0 auto 20px auto;
+
+    h2 {
+        font-size: 2em;
+    }
+
+    &_form {
+        .champ {
+            margin: 5px auto;
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+
+            input {
+                padding: 5px 8px;
+                border-radius: 5px;
+            }
+
+            input:disabled {
+                background-color: light-dark(rgba(239, 239, 239, 0.73), rgba(59, 59, 59, 0.3));
+                cursor: not-allowed;
+            }
+        }
+
+        &-button {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+
+            button {
+                border-color: #00bc77;
+                background-color: #00bc77;
+                color: #fff;
+                font-weight: bold;
+                padding: 10px;
+                margin-top: 10px;
+
+                @media (min-width: 720px) {
+                    width: 150px;
+                }
+            }
+        }
+    }
+}
