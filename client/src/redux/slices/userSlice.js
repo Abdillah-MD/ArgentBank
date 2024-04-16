@@ -115,6 +115,14 @@ const userSlice = createSlice({
     builder.addCase(getUser.fulfilled, (state, action) => {
       state.user = action.payload
     })
+
+    // Cas où on arrive pas à obtenir les infos utilisateur
+    builder.addCase(getUser.rejected, (state, action) => {
+      state.user = {}
+      state.isAuthenticated = action.meta.rejectedWithValue
+      state.token = null
+      sessionStorage.clear()
+    })
     ////////////////////////////////////////////////////////
 
     // Pour changer le userName ///////
