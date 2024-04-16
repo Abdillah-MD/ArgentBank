@@ -43,11 +43,11 @@ const Header = () => {
                     {isAuthenticated && (
                         <>
                             <p className="header_nav-link" to="/admin/"><i className="fa-solid fa-circle-user"></i> <UserName name={`${User?.userName}`} /></p>
-                            <Link className="header_nav-link" to="/accueil" onClick={removeToken}><i className="fa-solid fa-right-from-bracket"></i> Sign out</Link>
+                            <Link className="header_nav-link" to="/accueil" onClick={removeToken}><i className="fa-solid fa-right-from-bracket"></i>&nbsp; Sign out</Link>
                         </>
                     )}
                 </>  
-                    : <Link className="header_nav-link" to="sign-in"><i className="fa-solid fa-circle-user"></i> Sign in</Link>
+                    : <Link className="header_nav-link" to="sign-in"><i className="fa-solid fa-circle-user"></i>&nbsp; Sign in</Link>
                 }
             </nav>
         </header>
