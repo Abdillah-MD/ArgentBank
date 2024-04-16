@@ -40,7 +40,7 @@ const SignIn = () => {
             navigate('/admin') // Redirection vers la page admin si la connexion réussit
         }
 
-        console.log(formData)
+        // console.log(formData)
 
     }
 

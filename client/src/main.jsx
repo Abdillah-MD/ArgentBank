@@ -11,6 +11,7 @@ import SignIn from './pages/SignIn/main'
 import Admin from './pages/Admin/main'
 import SignUp from './pages/SignUp/main'
 import ErrorBoundary from './components/ErrorBoundary/ErrorBoundary'
+import Error404 from './pages/Error404/main'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <Provider store={store}>
@@ -25,6 +26,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <Route path='/sign-in' element={<SignIn />} />
         <Route path='/sign-up' element={<SignUp />} />
         <Route path='/admin' element={<Admin />} />
+        <Route path='*' element={<Error404 /> }/>
       </Routes>
       <Footer />
     </Router>

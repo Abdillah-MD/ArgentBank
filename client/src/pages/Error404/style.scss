@@ -1,0 +1,23 @@
+// Style pour la page erreur 404
+.err404 {
+    text-align: center;
+    border-top: 1px solid #ccc;
+    padding-top: 50px;
+
+    h1 {
+        font-size: 28px;
+    }
+
+    a {
+        display: block;
+        color: #213547;
+    }
+
+    img {
+        @media (max-width: 768px) {
+            width: 90%;
+            display: block;
+            margin: 15px auto;
+        }
+    }
+}
