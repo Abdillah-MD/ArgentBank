@@ -127,6 +127,32 @@ paths:
           description: Invalid Fields
         '500':
           description: Internal Server Error
+  /user/transaction/note:
+    put: 
+      security: 
+        - Bearer: []
+      tags: 
+        - User Transaction
+      summary: User transaction note API
+      description: API to add note to a transaction
+      parameters: 
+        - in: body
+          name: body
+          description: Add note to a transaction
+          required: true
+          schema: 
+            $ref: '#/definitions/TransactionNote'
+      produces: 
+        - application/json
+      responses:
+        '200':
+          description: User transaction note retrieved successully
+          schema: 
+            $ref: '#/definitions/TransactionNote'
+        '400': 
+          description: Invalid Fields
+        '500':
+          description: Internal Server Error
 securityDefinitions:
   Bearer:
     type: apiKey
@@ -186,4 +212,9 @@ definitions:
     type: object 
     properties:
       transactionCat: 
+        type: string
+  TransactionNote:
+    type: object 
+    properties:
+      transactionNote: 
         type: string
