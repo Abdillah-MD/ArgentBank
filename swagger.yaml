@@ -101,15 +101,45 @@ paths:
           description: Invalid Fields
         '500':
           description: Internal Server Error
-  /user/transaction/category:
+  /transaction/all/{month}:
+    get:
+      security: 
+        - Bearer: []
+      tags: 
+        - Transaction Module
+      summary: Transaction get all API
+      description: API to obtain all transactions for the current month
+      parameters: 
+        - in: path
+          name: month
+          type: string
+          required: true
+          description: Date of the transaction to update
+      produces: 
+       - application/json
+      responses:
+        '200':
+          description: Transactions recovered successfully
+          schema:
+            $ref: '#/definitions/TransactionAccount'
+        '400': 
+          description: 'Invalid Fields'
+        '500':
+          description: Internal Server Error
+  /transaction/category/{id}:
     put:
       security: 
         - Bearer: []
       tags: 
-       - User Transaction
-      summary: User transaction API
+       - Transaction Module
+      summary: Transaction category API
       description: API for edit category of transaction
       parameters: 
+        - in: path
+          name: id
+          type: string
+          required: true
+          description: ID of the transaction to update
         - in: body
           name: body
           description: Update transaction category 
@@ -120,22 +150,27 @@ paths:
         - application/json
       responses:
         '200':
-          description: User transaction category retrieved successully
+          description: Transaction category retrieved successully
           schema:
             $ref: '#/definitions/ApiResponse'
         '400':
           description: Invalid Fields
         '500':
           description: Internal Server Error
-  /user/transaction/note:
+  /transaction/note/{id}:
     put: 
       security: 
         - Bearer: []
       tags: 
-        - User Transaction
-      summary: User transaction note API
-      description: API to add note to a transaction
+        - Transaction Module
+      summary: Transaction note API
+      description: API to edit note to a transaction
       parameters: 
+        - in: path
+          name: id
+          type: string
+          required: true
+          description: ID of the transaction to update
         - in: body
           name: body
           description: Add note to a transaction
@@ -146,7 +181,7 @@ paths:
         - application/json
       responses:
         '200':
-          description: User transaction note retrieved successully
+          description: Transaction note retrieved successully
           schema: 
             $ref: '#/definitions/TransactionNote'
         '400': 
@@ -208,6 +243,102 @@ definitions:
     properties:
       userName:
         type: string
+  TransactionAccount:
+    type: object
+    properties: 
+      CurrentAccount:
+        type: object
+        properties:
+          id:
+            type: string
+          balance: 
+            type: string
+          transaction:
+            type: array
+            items: 
+              type: object
+              properties:
+                id: 
+                  type: string
+                Details : 
+                  type: object
+                  properties:
+                   Type: 
+                    type: string
+                   Category:
+                    type: string
+                   Note:
+                    type: string
+                Date:
+                  type: string
+                Description: 
+                  type: string
+                Amount:
+                 type: string
+                Balance: 
+                  type: string
+      SavingsAccount:
+        type: object
+        properties:
+          id:
+            type: string
+          balance: 
+            type: string
+          transaction:
+            type: array
+            items: 
+              type: object
+              properties:
+                id: 
+                  type: string
+                Details : 
+                  type: object
+                  properties:
+                   Type: 
+                    type: string
+                   Category:
+                    type: string
+                   Note:
+                    type: string
+                Date:
+                  type: string
+                Description: 
+                  type: string
+                Amount:
+                 type: string
+                Balance: 
+                  type: string
+      CreditCard: 
+        type: object
+        properties:
+          id:
+            type: string
+          balance: 
+            type: string
+          transaction:
+            type: array
+            items: 
+              type: object
+              properties:
+                id: 
+                  type: string
+                Details : 
+                  type: object
+                  properties:
+                   Type: 
+                    type: string
+                   Category:
+                    type: string
+                   Note:
+                    type: string
+                Date:
+                  type: string
+                Description: 
+                  type: string
+                Amount:
+                 type: string
+                Balance: 
+                  type: string
   TransactionCategory:
     type: object 
     properties:
