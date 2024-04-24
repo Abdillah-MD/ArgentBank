@@ -1,5 +1,5 @@
 import { Link, useLocation } from "react-router-dom"
-import logo from "/images/argentBankLogo.png"
+import logo from "/images/argentBankLogo.webp"
 import './style.scss'
 import { useDispatch, useSelector } from "react-redux"
 import { selectIsAuthenticated, selectToken, selectUser } from "../../redux/selectors/authSelectors"

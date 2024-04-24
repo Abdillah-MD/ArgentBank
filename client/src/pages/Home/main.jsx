@@ -1,8 +1,8 @@
 import Banner from "../../components/Banner/main"
 import Card from "../../components/Card/main"
-import chatIcon from "/images/icon-chat.png"
-import moneyIcon from "/images/icon-money.png"
-import secureIcon from "/images/icon-security.png"
+import chatIcon from "/images/icon-chat.webp"
+import moneyIcon from "/images/icon-money.webp"
+import secureIcon from "/images/icon-security.webp"
 import "./style.scss"
 
 const Home = () => {

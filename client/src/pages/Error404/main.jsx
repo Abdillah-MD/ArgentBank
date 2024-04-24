@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom"
 import "./style.scss"
-import imgErr404 from "/images/404_argBk.png"
+import imgErr404 from "/images/404_argBk.webp"
 
 const Error404 = () => {
     return (
