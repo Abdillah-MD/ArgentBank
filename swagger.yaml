@@ -133,9 +133,14 @@ paths:
       parameters: 
         - in: path
           name: accountId
-          type: number
+          type: integer
           required: true
           description: Id for account to get all transactions
+        - in: query
+          name: month
+          type: string
+          required: true
+          description: Date of the transaction yyyy-mm
       produces: 
        - application/json
       responses:
