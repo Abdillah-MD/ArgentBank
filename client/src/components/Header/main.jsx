@@ -5,7 +5,8 @@ import { useDispatch, useSelector } from "react-redux"
 import { selectIsAuthenticated, selectToken, selectUser } from "../../redux/selectors/authSelectors"
 import UserName from "../UserName/main"
 import { useEffect } from "react"
-import { getUser, logout } from "../../redux/slices/userSlice"
+import { logout } from "../../redux/slices/userSlice"
+import { getUser } from "../../callAPI/callAPI"
 
 const Header = () => {
     // const location = useLocation()

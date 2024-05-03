@@ -4,7 +4,7 @@ import "./style.scss"
 import UserName from "../../components/UserName/main"
 import { useEffect, useState } from "react"
 import TransactionCard from "../../components/TransactionCard/main"
-import { getUser, updateUserName } from "../../redux/slices/userSlice"
+import { getUser, updateUserName } from "../../callAPI/callAPI"
 import EditUserName from "../../components/UserEdit/main"
 
 const Admin = () => {

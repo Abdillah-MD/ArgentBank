@@ -3,7 +3,7 @@ import Form from "../../components/Form/main"
 import "./style.scss"
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { login } from "../../redux/slices/userSlice"
+import { login } from "../../callAPI/callAPI"
 import { selectCreateAcountSuccess, selectError } from "../../redux/selectors/authSelectors";
 
 const SignIn = () => {

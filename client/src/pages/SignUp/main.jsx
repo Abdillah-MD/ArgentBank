@@ -4,7 +4,7 @@ import "./style.scss"
 // import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
-import { createAcount } from "../../redux/slices/userSlice";
+import { createAcount } from "../../callAPI/callAPI";
 import { selectCreateAcountSuccess } from "../../redux/selectors/authSelectors";
 
 const SignUp = () => {
