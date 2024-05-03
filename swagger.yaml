@@ -101,7 +101,7 @@ paths:
           description: Invalid Fields
         '500':
           description: Internal Server Error
-  /account/{userId}:
+  /user/accounts:
     get:
       security: 
         - Bearer: []
@@ -109,12 +109,6 @@ paths:
         - Account Module
       summary: Account information API 
       description: API to get all account resume
-      parameters:
-        - in: path
-          name: userId
-          type: number
-          required: true
-          description: user Id to obtain all the accounts concerning him
       produces:
         - application/json
       responses: 
@@ -122,7 +116,11 @@ paths:
           description: Acounts recovered successfully
           schema:
             $ref: '#/definitions/AccountResume'
-  /transaction/{accountId}:
+        '400': 
+          description: 'Invalid Fields'
+        '500':
+          description: Internal Server Error
+  /user/accounts/{accountId}/transactions:
     get:
       security: 
         - Bearer: []
@@ -152,7 +150,7 @@ paths:
           description: 'Invalid Fields'
         '500':
           description: Internal Server Error
-  /transaction/category/{id}:
+  /user/accounts/{accountId}/transactions/{transactionId}/category:
     put:
       security: 
         - Bearer: []
@@ -162,7 +160,12 @@ paths:
       description: API for edit category of transaction
       parameters: 
         - in: path
-          name: id
+          name: accountId
+          type: integer
+          required: true
+          description: Id for account
+        - in: path
+          name: transactionId
           type: number
           required: true
           description: ID of the transaction to update
@@ -183,7 +186,7 @@ paths:
           description: Invalid Fields
         '500':
           description: Internal Server Error
-  /transaction/note/{id}:
+  /user/accounts/{accountId}/transactions/{transactionId}/note:
     put: 
       security: 
         - Bearer: []
@@ -193,7 +196,12 @@ paths:
       description: API to edit note to a transaction
       parameters: 
         - in: path
-          name: id
+          name: accountId
+          type: integer
+          required: true
+          description: Id for account
+        - in: path
+          name: transactionId
           type: number
           required: true
           description: ID of the transaction to update
